@@ -27,18 +27,12 @@ class Paint(object):
 
         self.print_cat_button = Button(self.root, text='print categories', command=self.use_print_cat)
         self.print_cat_button.grid(row=0, column=1)
-
-      #  self.color_button = Button(self.root, text='color', command=self.choose_color)
-      #  self.color_button.grid(row=0, column=2)
       
         self.save_button = Button(self.root, text='submit', command=self.use_save)
         self.save_button.grid(row=0, column=2)
 
         self.clear_button = Button(self.root, text='clear', command=self.use_clear)
         self.clear_button.grid(row=0, column=3)
-
-        #self.choose_size_button = Scale(self.root, from_=1, to=10, orient=HORIZONTAL)
-        #self.choose_size_button.grid(row=0, column=4)
 
         self.c = Canvas(self.root, bg='white', width=256, height=256)
         self.c.grid(row=1, columnspan=5)
@@ -49,7 +43,6 @@ class Paint(object):
     def setup(self):
         self.old_x = None
         self.old_y = None
-        #self.line_width = self.choose_size_button.get()
         self.line_width = 16
         self.color = self.DEFAULT_COLOR
         self.c.bind('<B1-Motion>', self.paint)
@@ -59,19 +52,13 @@ class Paint(object):
       print(categories)
       messagebox.showinfo('Categories', ', '.join(categories))
 
-   # def choose_color(self):
-   #     self.eraser_on = False
-   #     self.color = askcolor(color=self.color)[1]
-
     def predict_drawing(self, pic):
         pic = pic / 255
         pic.resize(1, 28, 28, 1)
         prediction = model.predict(pic)
-        #prediction.resize(5)
         prediction.resize(40)
         prediction = prediction.tolist()
         index = prediction.index(max(prediction))
-        #print(prediction)
         print(categories[index])
         print('Confidence: ', (prediction[index]) * 100, '%')
 
@@ -98,7 +85,6 @@ class Paint(object):
         self.active_button = some_button
 
     def paint(self, event):
-        #self.line_width = self.choose_size_button.get()
         self.line_width = 16
         paint_color = self.color
         if self.old_x and self.old_y:
