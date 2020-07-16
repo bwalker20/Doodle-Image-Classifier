@@ -68,13 +68,18 @@ class Paint(object):
         img = Image.open("saved_canvas.eps")
         img.save('file_image.png', 'png')
         x = Image.open('file_image.png', 'r')
+        x = self.convert_image(x)
+        self.predict_drawing(x)
+        img.close()
         os.remove('saved_canvas.eps')
         os.remove('file_image.png')
+
+    def convert_image(self, x):
         x = x.convert('L')
         x = x.resize((28,28))
         y = np.asarray(x.getdata(), dtype = np.uint8)
         y = np.invert(y)
-        self.predict_drawing(y)
+        return y
 
     def use_clear(self):
         self.c.delete('all')
