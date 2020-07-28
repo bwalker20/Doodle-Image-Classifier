@@ -2,7 +2,7 @@
 Python program that uses Google's hand drawn image database to create a predictive model and a Tkinter interface to allow a user to draw an image and have the model guess what the user drew.
 
 draw_model contains a predictive model with 15 classifications which is very accurate.
-final_model contain a predictive model with 40 classifications which is not very accurate.
+final_model contains a predictive model with 40 classifications which is not very accurate.
 
 paint.py will run the draw_model predictive model.
 paint_final will run the final_model predictive model.
